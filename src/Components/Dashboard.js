@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
+import {Link, Route} from 'react-router-dom';
+import Details from './Details'
 
 class Dashboard extends Component {
+    constructor(props){
+        super(props)
+            this.state={
+                charVal: ''
+        }
+    }
+
+    handleInput = (e) => {
+        this.setState({
+                [e.target.name]: e.target.value
+        })
+    }
+
 
     render() {
         return (
             <div>
                 {/* the value on each character represents their swapi id. for example https://swapi.co/api/people/1/ will return Luke and all of his info. */}
-                <select>
+                <select name='charVal' onChange={this.handleInput}>
                     <option value="" selected disabled hidden>Select a character</option>
                     <option value="1">Luke</option>
                     <option value="2">C-3P0</option>
@@ -25,7 +40,7 @@ class Dashboard extends Component {
                     <option value="36">Jar Jar Binks</option>
                     <option value="44">Darth Maul</option>
                 </select>
-                <button>Get Details</button>
+               <Link to={`/Details/${this.state.charVal}`}><button>Get Details</button></Link>
                 {/* when this button is clicked it should link to the details component. */}
             </div>
         );
